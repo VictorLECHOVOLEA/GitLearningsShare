@@ -1,14 +1,51 @@
 /*
 Author: Victor Lechovolea
 https://github.com/VictorLECHOVOLEA
-Briefly, everything I learned about C++ classe
+Briefly, everything I learned about C++ classes
 */
 
+/*
+Defining new types
+    Defining a Class
+        class Player {};
+        ! by convention, classes objects names begin with upper case letter
 
+    Defining Data Members
+        int speed;
+
+    Declaring Member Functions
+        void Greet()
+        ! by convention, member function names begin with upper case letter
+
+    Specifying Access levels
+
+Member function definition:
+    Inside the class
+
+    Outside the class
+        void Player::Greet() {//some code }
+
+In main()
+    Instantiating Objects - when you create an object from a class type.
+        Specific objects are called Instances of a class.
+            Player tennisPlayer;
+            Player bimPlayer;
+    Accessing Data members;
+        tennisPlayer.profession = "tennis";
+        bimPlayer.profession = "engineer";
+    
+    Calling Member Functions
+        tennisPlayer.Greet();
+        bimPlayer.Greet();
+
+*/
+
+/*----------------------------------------------------------------*/
 
 
 // /* 
-// Example 002 -- START 
+// Example 002 - Introducting the Simle Critter Program
+// Example -- START 
 #include <iostream>
 using namespace std;
 
@@ -41,6 +78,46 @@ int main() {
 
 // Example -- END
 // */
+
+/*----------------------------------------------------------------*/
+
+// /* 
+// Example 002 - Introducting the Simle Critter Program
+// Example -- START 
+#include <iostream>
+using namespace std;
+
+// by convention, class is defined with class keyword
+// by convention, Class objects start with Uppercase letter.
+class Critter {     // class definition --defines a new type Critter
+public:
+    int m_Hunger;   // data member
+    void Greet();   // member function prototype
+}; // class is surrounded by curly brackets and end with a semicolon.
+
+// function definition outside class constructor. :: operator
+void Critter::Greet() { // member function definition
+    cout << "Hi. I'm a critter. My hunger level is " << m_Hunger << ".\n";
+}
+
+int main() {
+    Critter crit1;
+    Critter crit2;
+    crit1.m_Hunger = 9;
+    cout << "crit1's hunger level is " << crit1.m_Hunger << ".\n";
+
+    crit2.m_Hunger = 3;
+    cout << "crit2's hunger level is " << crit2.m_Hunger << ".\n";
+
+    crit1.Greet();
+    crit2.Greet();
+    return 0;
+}
+
+// Example -- END
+// */
+
+/*----------------------------------------------------------------*/
 
 
 
