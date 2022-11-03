@@ -35,6 +35,11 @@ Member function definition:
                 Class name
                 :: scope resolution operator
                 Constructor which will use the same name as the class. We can't change it.
+// Setting up access levels
+    like functions, we have to treat objects as encapsulated.
+
+    private
+
 
 
 In main()
@@ -94,69 +99,129 @@ int main() {
 
 /*----------------------------------------------------------------*/
 
+// // /* 
+// // Example 002 - Introducting the Constructor Critter Program
+// // Example -- START 
+// // Page 224
+// // Constructor Critter
+// // Demonstrates constructors
+
+// #include <iostream>
+// using namespace std;
+
+// class Critter {
+// public:
+//     int m_Hunger;
+//     Critter(int hunger = 0); // constructor prototype
+//     void Greet();
+// };
+
+// // constructor is a special function
+// // the constructor has no return type
+// // You have to give the same name as the class itself - NO FLEXIBILITY
+// /*
+// A default constructor requires no arguments. If you don't define a default constructor, the compiler 
+// defines a minimal one for you that simply calls the default constructors of any data members of the 
+// class. If you write your own constructor, then the compiler won't provide a default constructor for 
+// you. It's usually a good idea to have a default constructor, so you should make sure to supply your 
+// own when necessary. 
+// One way to accomplish this is to supply default arguments for all parameters 
+// in a constructor definition. 
+// */
+// Critter::Critter(int hunger){    // constructor definition
+//     cout << "A new critter has been born!" << "\n";
+//     m_Hunger = hunger; 
+//     //initialization of the object's m_Hunger data member with the argument
+//     // passed to the constructor.
+//     // if no value is passed, 
+//     // then the constructor uses the default argument value of 0 from constructor prototype above.
+// }
+// /*
+// TRICK
+// You can use member initializers as a shorthand way to assign values to data members in a constructor. 
+// To write a member initializer, start with a colon after the constructor's parameter list. Then 
+// type the name of the data member you want to initialize, followed by the expression you want to 
+// assign to the data member, surrounded by parentheses. 
+// If you have multiple initializers, separate them with commas. 
+// This is much simpler than it sounds (and it's really useful, too). 
+// Here's an example that assigns hunger to m_Hunger and boredom to m_Boredom. 
+// Member initializers are especially useful when you have many data members to initialize. 
+
+// Critter::Critter(int hunger, int boredom):
+//     m_hunger(hunger),
+//     m_Boredom(boredom)
+//     {} // empty constructor body
+// */
+// void Critter::Greet() { // member function definition
+//     cout << "Hi. I'm a critter. My hunger level is " << m_Hunger << ".\n\n";
+// }
+
+// int main() {
+//     // Calling a constructor automatically
+//     // when crit is instantiated, the constructor is automatically called and the message "A new..." is displayed.
+//     // then the constructor assigns 7 to the objects's m_Hunger data member.
+//     Critter crit(7);
+//     crit.Greet();
+
+//     return 0;
+// }
+
+// // Example -- END
+// // */
+
+/*----------------------------------------------------------------*/
+
+
+// 
 // /* 
-// Example 002 - Introducting the Constructor Critter Program
+// Example 003 - Introducting the Private Critter Program
 // Example -- START 
-// Page 224
-// Constructor Critter
-// Demonstrates constructors
+// Page 227
+
+// Private Critter
+// Demonstrates Setting up member access levels
+
 
 #include <iostream>
 using namespace std;
 
 class Critter {
-public:
-    int m_Hunger;
+public: // begin public section
     Critter(int hunger = 0); // constructor prototype
-    void Greet();
+    int GetHunger() const;
+    void SetHunger(int hunger);
+
+private: // begin private section
+    int m_Hunger;
 };
 
-// constructor is a special function
-// the constructor has no return type
-// You have to give the same name as the class itself - NO FLEXIBILITY
-/*
-A default constructor requires no arguments. If you don't define a default constructor, the compiler 
-defines a minimal one for you that simply calls the default constructors of any data members of the 
-class. If you write your own constructor, then the compiler won't provide a default constructor for 
-you. It's usually a good idea to have a default constructor, so you should make sure to supply your 
-own when necessary. 
-One way to accomplish this is to supply default arguments for all parameters 
-in a constructor definition. 
-*/
-Critter::Critter(int hunger){    // constructor definition
-    cout << "A new critter has been born!" << "\n";
-    m_Hunger = hunger; 
-    //initialization of the object's m_Hunger data member with the argument
-    // passed to the constructor.
-    // if no value is passed, 
-    // then the constructor uses the default argument value of 0 from constructor prototype above.
+Critter::Critter(int hunger):m_Hunger(hunger) {
+    cout << "A new critter has been born!" << endl;
 }
-/*
-TRICK
-You can use member initializers as a shorthand way to assign values to data members in a constructor. 
-To write a member initializer, start with a colon after the constructor's parameter list. Then 
-type the name of the data member you want to initialize, followed by the expression you want to 
-assign to the data member, surrounded by parentheses. 
-If you have multiple initializers, separate them with commas. 
-This is much simpler than it sounds (and it's really useful, too). 
-Here's an example that assigns hunger to m_Hunger and boredom to m_Boredom. 
-Member initializers are especially useful when you have many data members to initialize. 
 
-Critter::Critter(int hunger, int boredom):
-    m_hunger(hunger),
-    m_Boredom(boredom)
-    {} // empty constructor body
-*/
-void Critter::Greet() { // member function definition
-    cout << "Hi. I'm a critter. My hunger level is " << m_Hunger << ".\n\n";
+int Critter::GetHunger() const {
+    return m_Hunger;
+}
+
+void Critter::SetHunger(int hunger) {
+    if (hunger < 0) {
+        cout << "You can't set a critter's hunger to a negative number. \n\n";
+    } else {
+        m_Hunger = hunger;
+    }
 }
 
 int main() {
-    // Calling a constructor automatically
-    // when crit is instantiated, the constructor is automatically called and the message "A new..." is displayed.
-    // then the constructor assigns 7 to the objects's m_Hunger data member.
-    Critter crit(7);
-    crit.Greet();
+    Critter crit(5);
+    // cout << crit.m_Hunger; // illegal, m_Hunger is private!
+    cout << "Calling GetHunget() " << crit.GetHunger() << "\n\n";
+
+    cout << "Calling SetHunger() with -1. \n";
+    crit.SetHunger(-1);
+
+    cout << "Calling setHunger() with 9.\n";
+    crit.SetHunger(9);
+    cout << "Calling GetHunger(): " << crit.GetHunger() << "\n\n"; 
 
     return 0;
 }
@@ -165,6 +230,16 @@ int main() {
 // */
 
 /*----------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
 
 
 
