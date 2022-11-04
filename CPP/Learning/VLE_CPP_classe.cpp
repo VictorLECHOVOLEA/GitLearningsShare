@@ -58,6 +58,12 @@ In main()
 
 */
 
+
+/*
+Keyworks terms to remember in this Class chapter:
+-- Accessor Member Functions --> allows indirect access to member functions
+*/
+
 /*----------------------------------------------------------------*/
 
 
@@ -172,57 +178,117 @@ int main() {
 /*----------------------------------------------------------------*/
 
 
-// 
-// /* 
-// Example 003 - Introducting the Private Critter Program
-// Example -- START 
-// Page 227
+// // /* 
+// // Example 003 - Introducting the Private Critter Program
+// // Example -- START 
+// // Page 227
 
-// Private Critter
-// Demonstrates Setting up member access levels
+// // Private Critter
+// // Demonstrates Setting up member access levels
+
+
+// #include <iostream>
+// using namespace std;
+
+// class Critter {
+// public: // begin public section
+//     Critter(int hunger = 0); // constructor prototype
+//     // most programmers begin their accessors member functions with Get and Set
+//     int GetHunger() const; // Accessor member functions
+//     void SetHunger(int hunger);
+
+// private: // begin private section
+//     // only the code in Critter can access the data member from private
+//     // Data members from private members cannot be accessed directly from main() function
+//     int m_Hunger; // Data member sample
+//     // member functions can be private as well 
+// // public: // public data members or member functions can follow again
+// // private: // private data members or member functions can follow again
+// };
+
+// Critter::Critter(int hunger):m_Hunger(hunger) {
+//     cout << "A new critter has been born!" << endl;
+// }
+
+// // Defining Accessor member functions
+// int Critter::GetHunger() const { 
+//     return m_Hunger;
+// }
+
+// void Critter::SetHunger(int hunger) {
+//     // SetHunger protects the integrity of the m_Hunger, 
+//     // ensuring that can be set to a negative value
+//     if (hunger < 0) {
+//         cout << "You can't set a critter's hunger to a negative number. \n\n";
+//     } else {
+//         m_Hunger = hunger;
+//     }
+// }
+
+// int main() {
+//     Critter crit(5);
+//     // cout << crit.m_Hunger; // illegal, m_Hunger is private!
+//     cout << "Calling GetHunget() " << crit.GetHunger() << "\n\n";
+//     // Calling GetHunget() 5
+
+//     cout << "Calling SetHunger() with -1. \n";
+//     crit.SetHunger(-1);
+
+//     cout << "Calling setHunger() with 9.\n";
+//     crit.SetHunger(9);
+//     cout << "Calling GetHunger(): " << crit.GetHunger() << "\n\n"; 
+
+//     return 0;
+// }
+
+// // Example -- END
+// // */
+
+/*----------------------------------------------------------------*/
+
+
+
+
+// /* 
+// Example 004 - Introduction to Static Critter Program
+// Example -- START 
+// Page 
+
+// Static Critter
+// Demonstrates static data members and functions
 
 
 #include <iostream>
+
 using namespace std;
 
 class Critter {
-public: // begin public section
-    Critter(int hunger = 0); // constructor prototype
-    int GetHunger() const;
-    void SetHunger(int hunger);
+public:
+    static int s_Total; // static data member;
+                        // total number of Critter objects in existence
+    Critter(int hunger = 0): m_Hunger(hunger) {
+    cout << "A critter has been born!" << endl;
+    ++s_Total;
+    }
+    
+    static int GetTotal() { // static member function 
+        return s_Total;
+    }
 
-private: // begin private section
+private:
     int m_Hunger;
 };
-
-Critter::Critter(int hunger):m_Hunger(hunger) {
-    cout << "A new critter has been born!" << endl;
-}
-
-int Critter::GetHunger() const {
-    return m_Hunger;
-}
-
-void Critter::SetHunger(int hunger) {
-    if (hunger < 0) {
-        cout << "You can't set a critter's hunger to a negative number. \n\n";
-    } else {
-        m_Hunger = hunger;
-    }
-}
+int Critter::s_Total = 0; // initialize static data member
 
 int main() {
-    Critter crit(5);
-    // cout << crit.m_Hunger; // illegal, m_Hunger is private!
-    cout << "Calling GetHunget() " << crit.GetHunger() << "\n\n";
+    cout << "The total number of critters is: ";
+    cout << Critter::s_Total << "\n\n";
 
-    cout << "Calling SetHunger() with -1. \n";
-    crit.SetHunger(-1);
+    Critter crit1, crit2, crit3;
 
-    cout << "Calling setHunger() with 9.\n";
-    crit.SetHunger(9);
-    cout << "Calling GetHunger(): " << crit.GetHunger() << "\n\n"; 
-
+    cout << "The total number of critters is: ";
+    cout << Critter::GetTotal() << "\n";
+    
     return 0;
 }
 
@@ -233,6 +299,27 @@ int main() {
 
 
 
+// // /* 
+// // Example 004 - 
+// // Example -- START 
+// // Page 
+
+// // 
+// // Demonstrates 
+
+
+// #include <iostream>
+// using namespace std;
+
+// int main() {
+
+//     return 0;
+// }
+
+// // Example -- END
+// // */
+
+// /*----------------------------------------------------------------*/
 
 
 
@@ -244,49 +331,6 @@ int main() {
 
 
 
-/* 
-// Example 000 
-// Example -- START 
-#include <iostream>
-#include <string>
-using namespace std;
-
-class BIMPlayer {
-private:
-    int age;
-    string name;
-    string country;
-    char team;
-
-public:
-    
-    BIMPlayer(int a, string n, string c, char t) {
-        age = a;
-        name = n;
-        country = c;
-        team = t;
-    }
-    void setAge(int a) {
-        age = a;
-    }
-
-};
-
-int main() {
-    int age;
-    cin >> age;
-    string name;
-    cin >> name;
-    string country;
-    cin >> country;
-    char team;
-    cin >> team;
-
-    return 0;
-}
 
 // how to install git
 // https://youtu.be/i_23KUAEtUM
-
-// Example -- END
-// */
