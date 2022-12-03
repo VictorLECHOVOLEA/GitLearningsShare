@@ -3,7 +3,7 @@ Author: Victor Lechovolea
 https://github.com/VictorLECHOVOLEA
 Briefly, everything I learned about C++ classes
 */
-
+ 
 /*
 Defining new types
     Defining a Class
